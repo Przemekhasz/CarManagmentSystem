@@ -88,6 +88,15 @@
     "doctrine/sql-formatter": {
         "version": "1.1.2"
     },
+    "easycorp/easyadmin-bundle": {
+        "version": "4.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "b131e6cbfe1b898a508987851963fff485986285"
+        }
+    },
     "fig/link-util": {
         "version": "1.2.0"
     },
@@ -208,6 +217,9 @@
             "./.env"
         ]
     },
+    "symfony/form": {
+        "version": "v6.0.9"
+    },
     "symfony/framework-bundle": {
         "version": "6.0",
         "recipe": {
@@ -233,6 +245,9 @@
     "symfony/http-kernel": {
         "version": "v6.0.9"
     },
+    "symfony/intl": {
+        "version": "v6.0.8"
+    },
     "symfony/maker-bundle": {
         "version": "1.43",
         "recipe": {
@@ -242,10 +257,16 @@
             "ref": "fadbfe33303a76e25cb63401050439aa9b1a9c7f"
         }
     },
+    "symfony/options-resolver": {
+        "version": "v6.0.3"
+    },
     "symfony/password-hasher": {
         "version": "v6.0.8"
     },
     "symfony/polyfill-intl-grapheme": {
+        "version": "v1.26.0"
+    },
+    "symfony/polyfill-intl-icu": {
         "version": "v1.26.0"
     },
     "symfony/polyfill-intl-normalizer": {
@@ -255,6 +276,9 @@
         "version": "v1.26.0"
     },
     "symfony/polyfill-php81": {
+        "version": "v1.26.0"
+    },
+    "symfony/polyfill-uuid": {
         "version": "v1.26.0"
     },
     "symfony/property-access": {
@@ -346,6 +370,9 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
+    },
+    "symfony/uid": {
+        "version": "v6.0.3"
     },
     "symfony/validator": {
         "version": "6.0",

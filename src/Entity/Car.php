@@ -38,8 +38,9 @@ class Car
 
     /**
      * @ORM\ManyToOne(targetEntity=CarCategory::class, inversedBy="car")
+     * @Groups({"car_listing:read", "car_listing:write"})
      */
-    private ?CarCategory $carCategory;
+    private ArrayCollection|Collection|CarCategory $carCategory;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -97,13 +98,15 @@ class Car
 
     /**
      * @ORM\ManyToOne(targetEntity=TypeOfFuel::class, inversedBy="car")
+     * @Groups({"car_listing:read", "car_listing:write"})
      */
-    private ?TypeOfFuel $typeOfFuel;
+    private ArrayCollection|Collection|TypeOfFuel $typeOfFuel;
 
     /**
      * @ORM\ManyToOne(targetEntity=Propulsion::class, inversedBy="car")
+     * @Groups({"car_listing:read", "car_listing:write"})
      */
-    private ?Propulsion $propulsions;
+    private ArrayCollection|Collection|Propulsion $propulsions;
 
     /**
      * @ORM\Column(type="integer", length=255)
@@ -113,18 +116,21 @@ class Car
 
     /**
      * @ORM\ManyToOne(targetEntity=BodyType::class, inversedBy="car")
+     * @Groups({"car_listing:read", "car_listing:write"})
      */
-    private ?BodyType $bodyType;
+    private ArrayCollection|Collection|BodyType $bodyType;
 
     /**
      * @ORM\ManyToOne(targetEntity=Color::class, inversedBy="car")
+     * @Groups({"car_listing:read", "car_listing:write"})
      */
-    private ?Color $color;
+    private ArrayCollection|Collection|Color $color;
 
     /**
      * @ORM\ManyToOne(targetEntity=CountryOfOrigin::class, inversedBy="car")
+     * @Groups({"car_listing:read", "car_listing:write"})
      */
-    private ?CountryOfOrigin $countryOfOrigin;
+    private ArrayCollection|Collection|CountryOfOrigin $countryOfOrigin;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -151,7 +157,7 @@ class Car
 
     public function getName(): ?string
     {
-        return $this->name;
+        return (string )$this->name;
     }
 
     public function setName(string $name): self
@@ -163,7 +169,7 @@ class Car
 
     public function getBrand(): ?string
     {
-        return $this->brand;
+        return (string) $this->brand;
     }
 
     public function setBrand(string $brand): self
@@ -175,7 +181,7 @@ class Car
 
     public function getEngineCapacity(): ?int
     {
-        return $this->engineCapacity;
+        return (int) $this->engineCapacity;
     }
 
     public function setEngineCapacity(?int $engineCapacity): self
@@ -187,7 +193,7 @@ class Car
 
     public function getModel(): ?string
     {
-        return $this->model;
+        return (string) $this->model;
     }
 
     public function setModel(string $model): self
@@ -211,7 +217,7 @@ class Car
 
     public function getVersion(): ?string
     {
-        return $this->version;
+        return (string) $this->version;
     }
 
     public function setVersion(?string $version): self
@@ -223,7 +229,7 @@ class Car
 
     public function getGeneration(): ?string
     {
-        return $this->generation;
+        return (string) $this->generation;
     }
 
     public function setGeneration(?string $generation): self
@@ -235,7 +241,7 @@ class Car
 
     public function getMileage(): ?int
     {
-        return $this->mileage;
+        return (int) $this->mileage;
     }
 
     public function setMileage(?int $mileage): self
@@ -247,7 +253,7 @@ class Car
 
     public function getDisplacement(): ?int
     {
-        return $this->displacement;
+        return (int) $this->displacement;
     }
 
     public function setDisplacement(?int $displacement): self
@@ -259,7 +265,7 @@ class Car
 
     public function getPower(): ?int
     {
-        return $this->power;
+        return (int) $this->power;
     }
 
     public function setPower(?int $power): self
@@ -271,7 +277,7 @@ class Car
 
     public function getTransmission(): ?string
     {
-        return $this->transmission;
+        return (string) $this->transmission;
     }
 
     public function setTransmission(?string $transmission): self
@@ -307,7 +313,7 @@ class Car
 
     public function getCombustion(): ?int
     {
-        return $this->combustion;
+        return (int) $this->combustion;
     }
 
     public function setCombustion(?int $combustion): self
@@ -355,7 +361,7 @@ class Car
 
     public function getVehicleRegistrationNumber(): ?string
     {
-        return $this->vehicleRegistrationNumber;
+        return (string) $this->vehicleRegistrationNumber;
     }
 
     public function setVehicleRegistrationNumber(?string $vehicleRegistrationNumber): self
@@ -367,7 +373,7 @@ class Car
 
     public function getVin(): ?string
     {
-        return $this->vin;
+        return (string) $this->vin;
     }
 
     public function setVin(?string $vin): self
@@ -389,4 +395,9 @@ class Car
     {
         return Carbon::instance($this->getCreatedAt())->diffForHumans();
     }
+
+    public function __toString(): string
+    {
+        return (string) $this->getName();
+   }
 }

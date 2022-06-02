@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method TypeOfFuel[]    findAll()
  * @method TypeOfFuel[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class TypeOfFuelRepository extends ServiceEntityRepository
+final class TypeOfFuelRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

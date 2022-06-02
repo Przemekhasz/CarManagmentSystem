@@ -7,6 +7,7 @@ use App\Repository\CountryOfOriginRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CountryOfOriginRepository::class)
@@ -23,8 +24,9 @@ class CountryOfOrigin
 
     /**
      * @ORM\OneToMany(targetEntity=Car::class, mappedBy="countryOfOrigin")
+     * @Groups({"car_listing:read", "car_listing:write"})
      */
-    private ?Car $car;
+    private ArrayCollection|Collection|Car $car;
 
     public function __construct()
     {

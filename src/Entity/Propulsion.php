@@ -7,6 +7,7 @@ use App\Repository\PropulsionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=PropulsionRepository::class)
@@ -23,8 +24,9 @@ class Propulsion
 
     /**
      * @ORM\OneToMany(targetEntity=Car::class, mappedBy="typeOfFuel")
+     * @Groups({"car_listing:read", "car_listing:write"})
      */
-    private ?Car $car;
+    private ArrayCollection|Collection|Car $car;
 
     public function __construct()
     {
