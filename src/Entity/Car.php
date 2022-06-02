@@ -35,6 +35,11 @@ class Car
     private ?string $name;
 
     /**
+     * @ORM\OneToOne(targetEntity=CarCategory::class, inversedBy="car", cascade={"persist", "remove"})
+     */
+    private ?CarCategory $category;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"car_listing:read", "car_listing:write"})
      */
@@ -45,13 +50,6 @@ class Car
      * @Groups({"car_listing:read", "car_listing:write"})
      */
     private $engineCapacity;
-
-    // todo: add category relation
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"car_listing:read", "car_listing:write"})
-     */
-    private ?string $category;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -195,18 +193,6 @@ class Car
         return $this;
     }
 
-    public function getCategory(): ?string
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?string $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
     public function getModel(): ?string
     {
         return $this->model;
@@ -215,6 +201,18 @@ class Car
     public function setModel(string $model): self
     {
         $this->model = $model;
+
+        return $this;
+    }
+
+    public function getCategory(): ?CarCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?CarCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
