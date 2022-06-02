@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CarCategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,9 +22,14 @@ class CarCategory
     private ?string $name;
 
     /**
-     * @ORM\OneToOne(targetEntity=Car::class, mappedBy="category", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity=Car::class, mappedBy="carCategory")
      */
     private ?Car $car;
+
+    public function __construct()
+    {
+        $this->car = new ArrayCollection();
+    }
 
     public function getName(): ?string
     {
@@ -36,24 +43,32 @@ class CarCategory
         return $this;
     }
 
-    public function getCar(): ?Car
+    /**
+     * @return Collection<int, Car>
+     */
+    public function getCar(): Collection
     {
         return $this->car;
     }
 
-    public function setCar(?Car $car): self
+    public function addCar(Car $car): self
     {
-        // unset the owning side of the relation if necessary
-        if ($car === null && $this->car !== null) {
-            $this->car->setCategory(null);
+        if (!$this->car->contains($car)) {
+            $this->car[] = $car;
+            $car->setCarCategory($this);
         }
 
-        // set the owning side of the relation if necessary
-        if ($car !== null && $car->getCategory() !== $this) {
-            $car->setCategory($this);
-        }
+        return $this;
+    }
 
-        $this->car = $car;
+    public function removeCar(Car $car): self
+    {
+        if ($this->car->removeElement($car)) {
+            // set the owning side to null (unless already changed)
+            if ($car->getCarCategory() === $this) {
+                $car->setCarCategory(null);
+            }
+        }
 
         return $this;
     }

@@ -37,9 +37,9 @@ class Car
     private ?string $name;
 
     /**
-     * @ORM\OneToOne(targetEntity=CarCategory::class, inversedBy="car", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=CarCategory::class, inversedBy="car")
      */
-    private ?CarCategory $category;
+    private ?CarCategory $carCategory;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -197,14 +197,14 @@ class Car
         return $this;
     }
 
-    public function getCategory(): ?CarCategory
+    public function getCarCategory(): ?CarCategory
     {
-        return $this->category;
+        return $this->carCategory;
     }
 
-    public function setCategory(?CarCategory $category): self
+    public function setCarCategory(?CarCategory $carCategory): self
     {
-        $this->category = $category;
+        $this->carCategory = $carCategory;
 
         return $this;
     }
