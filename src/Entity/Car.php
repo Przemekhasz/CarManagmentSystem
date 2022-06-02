@@ -6,6 +6,8 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\CarRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Carbon\Carbon;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -17,7 +19,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "get"={},
  *          "put"
  *     },
- *     shortName="car",
+ *     shortName="Car",
  *     normalizationContext={"groups"={"car_listing:read"}, "swagger_definition_name"="Read"},
  *     denormalizationContext={"groups"={"car_listing:write"}, "swagger_definition_name"="Write"}
  * )
@@ -49,7 +51,7 @@ class Car
      * @ORM\Column(type="integer", length=255)
      * @Groups({"car_listing:read", "car_listing:write"})
      */
-    private $engineCapacity;
+    private int $engineCapacity;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -93,19 +95,15 @@ class Car
      */
     private ?string $transmission;
 
-    // todo: add type of fuel relation
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"car_listing:read", "car_listing:write"})
+     * @ORM\ManyToOne(targetEntity=TypeOfFuel::class, inversedBy="car")
      */
-    private ?string $typeOfFuel;
+    private ?TypeOfFuel $typeOfFuel;
 
-    // todo: add propulsion relation
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"car_listing:read", "car_listing:write"})
+     * @ORM\ManyToOne(targetEntity=Propulsion::class, inversedBy="car")
      */
-    private ?string $propulsion;
+    private ?Propulsion $propulsions;
 
     /**
      * @ORM\Column(type="integer", length=255)
@@ -113,26 +111,20 @@ class Car
      */
     private int $combustion;
 
-    // todo: add bodyType relation
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"car_listing:read", "car_listing:write"})
+     * @ORM\ManyToOne(targetEntity=BodyType::class, inversedBy="car")
      */
-    private ?string $bodyType;
+    private ?BodyType $bodyType;
 
-    // todo: add color relation
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"car_listing:read", "car_listing:write"})
+     * @ORM\ManyToOne(targetEntity=Color::class, inversedBy="car")
      */
-    private ?string $color;
+    private ?Color $color;
 
-    // todo: add Country Of Origin relation
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Groups({"car_listing:read", "car_listing:write"})
+     * @ORM\ManyToOne(targetEntity=CountryOfOrigin::class, inversedBy="car")
      */
-    private ?string $CountryOfOrigin;
+    private ?CountryOfOrigin $countryOfOrigin;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -289,24 +281,24 @@ class Car
         return $this;
     }
 
-    public function getTypeOfFuel(): ?string
+    public function getTypeOfFuel(): ?TypeOfFuel
     {
         return $this->typeOfFuel;
     }
 
-    public function setTypeOfFuel(?string $typeOfFuel): self
+    public function setTypeOfFuel(?TypeOfFuel $typeOfFuel): self
     {
         $this->typeOfFuel = $typeOfFuel;
 
         return $this;
     }
 
-    public function getPropulsion(): ?string
+    public function getPropulsion(): ?Propulsion
     {
         return $this->propulsion;
     }
 
-    public function setPropulsion(?string $propulsion): self
+    public function setPropulsion(?Propulsion $propulsion): self
     {
         $this->propulsion = $propulsion;
 
@@ -325,38 +317,38 @@ class Car
         return $this;
     }
 
-    public function getBodyType(): ?string
+    public function getBodyType(): ?BodyType
     {
         return $this->bodyType;
     }
 
-    public function setBodyType(?string $bodyType): self
+    public function setBodyType(?BodyType $bodyType): self
     {
         $this->bodyType = $bodyType;
 
         return $this;
     }
 
-    public function getColor(): ?string
+    public function getColor(): ?Color
     {
         return $this->color;
     }
 
-    public function setColor(?string $color): self
+    public function setColor(?Color $color): self
     {
         $this->color = $color;
 
         return $this;
     }
 
-    public function getCountryOfOrigin(): ?string
+    public function getCountryOfOrigin(): ?CountryOfOrigin
     {
-        return $this->CountryOfOrigin;
+        return $this->countryOfOrigin;
     }
 
-    public function setCountryOfOrigin(?string $CountryOfOrigin): self
+    public function setCountryOfOrigin(?CountryOfOrigin $countryOfOrigin): self
     {
-        $this->CountryOfOrigin = $CountryOfOrigin;
+        $this->countryOfOrigin = $countryOfOrigin;
 
         return $this;
     }

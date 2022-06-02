@@ -17,12 +17,12 @@ class CarCategory
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private ?string $name;
 
     /**
      * @ORM\OneToOne(targetEntity=Car::class, mappedBy="category", cascade={"persist", "remove"})
      */
-    private $car;
+    private ?Car $car;
 
     public function getName(): ?string
     {
